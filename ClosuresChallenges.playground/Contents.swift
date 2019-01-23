@@ -54,4 +54,5 @@ func stuff() -> ()->(){
     return dummy
 }
 
-stuff()
+var i = stuff()
+i()
