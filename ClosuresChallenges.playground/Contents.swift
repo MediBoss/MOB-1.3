@@ -1,58 +1,18 @@
-import UIKit
-import Foundation
 
+var number = [2, 43, 333, 3, 6, 40, 50, 80]
 
-// Exercise 1
-
-
-let dummyVar = {
-    // everything here is a closure
-    print("Learning Swift")
+var reduceMethod = number.reduce(0) { (result, current) -> Int in
+    return max(result, current)
 }
+print(reduceMethod)
+var reduceMethodShort = number.reduce(0) { max($0, $1) }
+print(reduceMethodShort)
 
 
-dummyVar() // Void -> Void
 
-// Exercise 2
-
-// Takes in two int and returns an int
-let sum:(Int, Int) -> (Int) = { numOne, numTwo in
-    return numOne + numTwo
+var reduceMethodAddition = number.reduce(0) { (result, current) -> Int in
+    return result + current
 }
-
-let dummy_sum = sum(4,8)
-print(dummy_sum)
-
-
-// Exercise 3
-
-var returnFortyTwo:() -> () = {
-    return 42
-}
-
-returnFortyTwo()
-
-// Exercise 4
-
-let numbers = [22, 10, 42, 100, 8, 4]
-
-var sorted_numbers = numbers.sorted(by: { $0 < $1})
-
-print(sorted_numbers)
-
-
-// Exercise 5
-
-func stuff() -> ()->(){
-    
-    let message = "This is an important message"
-    
-    var dummy = {
-        print(message)
-    }
-    
-    return dummy
-}
-
-var i = stuff()
-i()
+print(reduceMethodAddition)
+var shortHandReduceAddition = number.reduce(0) { $0 + $1 }
+print(shortHandReduceAddition)
