@@ -11,34 +11,50 @@ import UIKit
 
 class FeedViewController: UIViewController{
     
-    lazy var feedCollectView = UICollectionView()
+    var feedCollectView = UICollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .blue
         configureFeedCollectionView()
+        feedCollectView.dataSource = self as UICollectionViewDataSource
+        feedCollectView.delegate = self as UICollectionViewDelegate
+        //anchorFeedCollectionView()
     }
     
     private func configureFeedCollectionView(){
         
         feedCollectView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         feedCollectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        feedCollectView.dataSource = self
-        feedCollectView.delegate = self
         feedCollectView.backgroundColor = .red
         feedCollectView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
     }
     
     private func anchorFeedCollectionView(){
         
+        feedCollectView.anchor(top: view.topAnchor,
+                               left: view.leftAnchor,
+                               bottom: view.bottomAnchor,
+                               right: view.rightAnchor,
+                               paddingTop: 0,
+                               paddingLeft: 0,
+                               paddingBottom: 0,
+                               paddingRight: 0,
+                               width: 0,
+                               height: 0,
+                               enableInsets: false)
     }
 }
 
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        return UICollectionViewCell.self
+        let cell = UICollectionViewCell()
+    
+        return cell
     }
     
     

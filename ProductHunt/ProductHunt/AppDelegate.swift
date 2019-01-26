@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        if let window = window{
-            
-            
-        }
+        let destinationVC = FeedViewController()
+        let navigationController = UINavigationController(rootViewController: destinationVC)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
         
         return true
     }
