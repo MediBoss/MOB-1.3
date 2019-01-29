@@ -38,7 +38,13 @@ class NetworkManager{
                 switch unwrappedResponse.statusCode{
                     
                 case 200:
-                    print("successss boiii")
+                    
+                    guard let products = try? JSONDecoder().decode([Product].self, from: unwrappedData) else{
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        completion(products)
+                    }
                 default:
                     print("Error with status code \(unwrappedResponse.statusCode)")
                 }
@@ -47,6 +53,7 @@ class NetworkManager{
                 print(error?.localizedDescription)
             }
         }
+        task.resume()
     }
     
 }

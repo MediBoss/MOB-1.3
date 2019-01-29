@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 struct Product{
     
     let id: Int
