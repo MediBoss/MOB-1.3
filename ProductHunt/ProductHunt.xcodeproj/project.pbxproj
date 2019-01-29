@@ -13,7 +13,7 @@
 		B845D9CC21EAFCEA00D2C3A5 /* ProductHuntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B845D9CB21EAFCEA00D2C3A5 /* ProductHuntTests.swift */; };
 		B84B80202200F7A700FA4B61 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84B801F2200F7A700FA4B61 /* Constants.swift */; };
 		B89407AC21FBE9F20034ED81 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89407AB21FBE9F20034ED81 /* UIView+Extension.swift */; };
-		B8CF77D421FBE08200FE5445 /* ProductServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF77D321FBE08200FE5445 /* ProductServices.swift */; };
+		B8CF77D421FBE08200FE5445 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF77D321FBE08200FE5445 /* NetworkManager.swift */; };
 		B8CF77D621FBE51300FE5445 /*  FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CF77D521FBE51300FE5445 /*  FeedViewController.swift */; };
 		B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3C2D52200D3B800FAC58C /* FeedViewCell.swift */; };
 		B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3C2D72200D50A00FAC58C /* CustomViews.swift */; };
@@ -41,7 +41,7 @@
 		B845D9CD21EAFCEA00D2C3A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B84B801F2200F7A700FA4B61 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B89407AB21FBE9F20034ED81 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		B8CF77D321FBE08200FE5445 /* ProductServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductServices.swift; sourceTree = "<group>"; };
+		B8CF77D321FBE08200FE5445 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B8CF77D521FBE51300FE5445 /*  FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FeedViewController.swift"; sourceTree = "<group>"; };
 		B8D3C2D52200D3B800FAC58C /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		B8D3C2D72200D50A00FAC58C /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 		B8CF77D221FBDFFC00FE5445 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B8CF77D321FBE08200FE5445 /* ProductServices.swift */,
+				B8CF77D321FBE08200FE5445 /* NetworkManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -264,7 +264,7 @@
 				B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */,
 				B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */,
 				B89407AC21FBE9F20034ED81 /* UIView+Extension.swift in Sources */,
-				B8CF77D421FBE08200FE5445 /* ProductServices.swift in Sources */,
+				B8CF77D421FBE08200FE5445 /* NetworkManager.swift in Sources */,
 				B8D3C2DA2200E3D600FAC58C /* Product.swift in Sources */,
 				B84B80202200F7A700FA4B61 /* Constants.swift in Sources */,
 			);
