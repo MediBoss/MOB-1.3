@@ -5,35 +5,23 @@
 //  Created by Medi Assumani on 1/25/19.
 //  Copyright © 2019 Medi Assumani. All rights reserved.
 //
-
 import Foundation
 import UIKit
 
 class FeedViewController: UIViewController{
     
-    var feedCollectView = UICollectionView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .blue
-        configureFeedCollectionView()
-        feedCollectView.dataSource = self as UICollectionViewDataSource
-        feedCollectView.delegate = self as UICollectionViewDelegate
-        //anchorFeedCollectionView()
+        view.addSubview(collectionView)
+        anchorFeedCollectionView()
     }
     
-    private func configureFeedCollectionView(){
-        
-        feedCollectView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
-        feedCollectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        feedCollectView.backgroundColor = .red
-        feedCollectView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
-    }
     
     private func anchorFeedCollectionView(){
-        
-        feedCollectView.anchor(top: view.topAnchor,
+
+        collectionView.anchor(top: view.topAnchor,
                                left: view.leftAnchor,
                                bottom: view.bottomAnchor,
                                right: view.rightAnchor,
@@ -45,6 +33,19 @@ class FeedViewController: UIViewController{
                                height: 0,
                                enableInsets: false)
     }
+    
+    lazy var collectionView: UICollectionView = {
+        
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
+        collectionView.backgroundColor = .lightGray
+        collectionView.register(FeedViewCell.self, forCellWithReuseIdentifier: FeedViewCell.identifier)
+        
+        return collectionView
+    }()
 }
 
 
@@ -52,8 +53,8 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = UICollectionViewCell()
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedViewCell.identifier, for: indexPath)
+
         return cell
     }
     
@@ -70,4 +71,24 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout{
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let screenWidth = collectionView.bounds.width
+        return CGSize(width: screenWidth/1.2, height: screenWidth/1.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
+    }
 }
