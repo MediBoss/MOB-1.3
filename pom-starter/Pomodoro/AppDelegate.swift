@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Pomodoro
 //
-//  Created by Medi Assumani on 1/21/19.
-//  Copyright © 2019 Medi Assumani. All rights reserved.
+//  Created by Adriana González Martínez on 1/16/19.
+//  Copyright © 2019 Adriana González Martínez. All rights reserved.
 //
 
 import UIKit

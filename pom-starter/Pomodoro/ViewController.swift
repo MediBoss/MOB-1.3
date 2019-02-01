@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Pomodoro
 //
-//  Created by Medi Assumani on 1/21/19.
-//  Copyright © 2019 Medi Assumani. All rights reserved.
+//  Created by Adriana González Martínez on 1/16/19.
+//  Copyright © 2019 Adriana González Martínez. All rights reserved.
 //
 
 import UIKit
@@ -41,18 +41,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var startPauseButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //ACTION: Set button actions for startPauseButton, resetButton and closeButton
-        
-        
+        startPauseButton.addTarget(self, action: #selector(startPauseButtonPressed(_:)), for: .touchUpInside)
+        resetButton.addTarget(self, action: #selector(resetButtonPressed(_:)), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonIsTapped(_:)), for: .touchUpInside)
+       
+
         resetAll()
         
     }
     
     // MARK: Update UI
+
     func updateTomatoes(to tomatoes: Int) {
         var currentTomato = 1
         for tomatoIcon in tomatoImages {
@@ -72,26 +76,33 @@ class ViewController: UIViewController {
     
     @objc func startPauseButtonPressed(_ sender: UIButton) {
         if timer.isValid {
-            // Timer running
-            // ACTION: Change the button’s title to “Continue”
-            // ACTION: Enable the reset button
-            // ACTION: Pause the timer, call the method pauseTimer
+         // Timer running
+         // ACTION: Change the button’s title to “Continue”
+            self.startPauseButton.setTitle("Continue", for: .normal)
+         // ACTION: Enable the reset button
+            resetButton.isEnabled = true
+         // ACTION: Pause the timer, call the method pauseTimer
+            self.pauseTimer()
             
-            
+           
         } else {
-            // Timer stopped or hasn't started
-            // ACTION: Change the button’s title to “Pause”
-            // ACTION: Disable the Reset button
+         // Timer stopped or hasn't started
+         // ACTION: Change the button’s title to “Pause”
+            self.startPauseButton.setTitle("Pause", for: .normal)
+         // ACTION: Disable the Reset button
+            resetButton.isEnabled = false
             
-            
+           
             
             if currentInterval == 0 && timeRemaining == pomodoroDuration {
                 // We are at the start of a cycle
                 // ACTION: begin the cycle of intervals
+                startTimer()
                 
             } else {
                 // We are in the middle of a cycle
                 // ACTION: Resume the timer.
+                
                 
             }
         }
@@ -104,17 +115,22 @@ class ViewController: UIViewController {
         }
         
         //ACTION: call the reset method
+        resetAll()
         
     }
-    
+
     //ACTION: add the method to dismiss the view controller
     
-    
+    @objc func closeButtonIsTapped(_ sender: UIButton){
+        
+        print("View dismissed")
+        dismiss(animated: true, completion: nil)
+    }
     // MARK: Time Manipulation
     
     func startTimer() {
         //ACTION: create the timer, selector should be runTimer()
-        
+        timer = Timer(timeInterval: <#T##TimeInterval#>, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
     }
     
     @objc func runTimer() {
@@ -173,7 +189,7 @@ class ViewController: UIViewController {
     func minutesAndSeconds(from seconds: Int) -> (Int, Int) {
         return (seconds / 60, seconds % 60)
     }
-    
+
     // Input: number, returns a string of 2 digits with leading zero if needed
     func formatNumber(_ number: Int) -> String {
         return String(format: "%02d", number)
