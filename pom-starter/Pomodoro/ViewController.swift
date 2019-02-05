@@ -103,7 +103,7 @@ class ViewController: UIViewController {
                 // We are in the middle of a cycle
                 // ACTION: Resume the timer.
                 
-                
+                startTimer()
             }
         }
     }
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
     
     func startTimer() {
         //ACTION: create the timer, selector should be runTimer()
-        timer = Timer(timeInterval: <#T##TimeInterval#>, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(runTimer), userInfo: nil, repeats: true)
     }
     
     @objc func runTimer() {
@@ -180,6 +180,7 @@ class ViewController: UIViewController {
             // If all intervals are complete, reset all.
             // ACTION: Post Notification
             resetAll()
+            NotificationCenter.default.post(name: Notification.Name("PomodoroCycles"), object: nil)
         }
     }
     

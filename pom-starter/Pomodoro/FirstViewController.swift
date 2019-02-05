@@ -15,7 +15,9 @@ class FirstViewController: UIViewController {
     
     deinit {
         //ACTION: Remove observers
-       
+       NotificationCenter.default.removeObserver(self,
+                                                 name: Notification.Name("PomodoroCycle"),
+                                                 object: nil)
     }
     
     override func viewDidLoad() {
@@ -23,13 +25,18 @@ class FirstViewController: UIViewController {
 
         //ACTION: Add observers
        
-        
+        // Listens to events on the Pomodoro page
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(receivedNotification(_:)),
+                                               name: Notification.Name("PomodoroCycles"),
+                                               object: nil)
     }
     
     @objc func receivedNotification(_ notification:Notification) {
         // ACTION: Update value of completed cycles
         // ACTION: Update message label
-        
+        completedCycles += 1
+        messageLabel.text = "\(completedCycles) pomodoro cycles completed today"
     }
 }
 
