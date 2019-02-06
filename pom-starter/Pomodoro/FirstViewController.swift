@@ -16,7 +16,7 @@ class FirstViewController: UIViewController {
     deinit {
         //ACTION: Remove observers
        NotificationCenter.default.removeObserver(self,
-                                                 name: Notification.Name("PomodoroCycle"),
+                                                 name: Notification.Name("PomodoroCycles"),
                                                  object: nil)
     }
     

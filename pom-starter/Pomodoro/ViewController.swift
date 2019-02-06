@@ -179,8 +179,8 @@ class ViewController: UIViewController {
         } else {
             // If all intervals are complete, reset all.
             // ACTION: Post Notification
-            resetAll()
             NotificationCenter.default.post(name: Notification.Name("PomodoroCycles"), object: nil)
+            resetAll()
         }
     }
     
