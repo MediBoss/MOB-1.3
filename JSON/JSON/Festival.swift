@@ -9,25 +9,20 @@
 import Foundation
 
 struct Participant: Codable{
-    let name: String
-    let id: String
+    let name: String?
+    let id: String?
 }
 
 struct City: Codable{
-    let name: String
-    let id: String
+    let name: String?
+    let id: String?
 }
 
-enum FestivalType: Codable{
-    case music
-    case food
-    case cinema
-}
 
 struct Festival: Codable{
-    let date: Date
-    let name: String
+    let date: String?
+    let name: String?
     let city: City
-    let lineup: [Participant]
-    let type: FestivalType
+    let lineup: [Participant]?
+    
 }

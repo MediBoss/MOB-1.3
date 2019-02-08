@@ -10,6 +10,10 @@ import UIKit
 
 class FestivalTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

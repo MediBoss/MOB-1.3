@@ -11,17 +11,12 @@ import Foundation
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        cell.textLabel?.text = "Stephen is blind"
-        
-        return cell
+    var festivals =  [Festival](){
+        didSet{
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
+        }
     }
     
     
@@ -33,15 +28,37 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func path(forResource name: String?, ofType fileExtension: String){
-        
-        let path = Bundle.main.path(forResource: "locations", ofType: ".json")
+        let path = Bundle.main.path(forResource: name, ofType: fileExtension)
         if let path = path {
             let url = URL(fileURLWithPath: path)
             let contents = try? Data(contentsOf: url, options: .alwaysMapped)
             
-            print(contents)
+            decodeContents(for: contents!)
         }
     }
     
+    func decodeContents(for data: Data){
+        
+        let decodedFestivals = try? JSONDecoder().decode([Festival].self, from: data)
+        guard let unwrappedFestivals = decodedFestivals else { return }
+        self.festivals = unwrappedFestivals
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return festivals.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableview.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! FestivalTableViewCell
+        var currentFestivale = festivals[indexPath.row]
+        cell.nameLabel.text = currentFestivale.name
+        cell.dateLabel.text = currentFestivale.date
+        cell.countLabel.text = "\(currentFestivale.lineup!.count) Artists"
+        
+        return cell
+    }
 }
 
