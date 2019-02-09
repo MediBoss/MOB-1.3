@@ -11,7 +11,5 @@ import Foundation
 public typealias Parameters = [String: Any]
 
 protocol ParameterEncoder {
-    
-    /// Method to encode the parameters of a url request
     static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
 }
