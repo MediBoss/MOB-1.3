@@ -24,6 +24,9 @@
 		B8FA49A1220E6BA700F4A28C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A0220E6BA700F4A28C /* Comment.swift */; };
 		B8FA49A5220F766000F4A28C /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A4220F766000F4A28C /* EndpointType.swift */; };
 		B8FA49A9220F775000F4A28C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A8220F775000F4A28C /* HTTPMethod.swift */; };
+		B8FA49AB220F781B00F4A28C /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49AA220F781B00F4A28C /* HTTPTask.swift */; };
+		B8FA49AD220F7AFA00F4A28C /* ParametersEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49AC220F7AFA00F4A28C /* ParametersEncoding.swift */; };
+		B8FA49AF220F7DCB00F4A28C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49AE220F7DCB00F4A28C /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,9 @@
 		B8FA49A0220E6BA700F4A28C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		B8FA49A4220F766000F4A28C /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		B8FA49A8220F775000F4A28C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		B8FA49AA220F781B00F4A28C /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		B8FA49AC220F7AFA00F4A28C /* ParametersEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersEncoding.swift; sourceTree = "<group>"; };
+		B8FA49AE220F7DCB00F4A28C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				B8FA49A8220F775000F4A28C /* HTTPMethod.swift */,
+				B8FA49AA220F781B00F4A28C /* HTTPTask.swift */,
+				B8FA49AE220F7DCB00F4A28C /* NetworkError.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 		B8FA49A7220F772900F4A28C /* Encoding */ = {
 			isa = PBXGroup;
 			children = (
+				B8FA49AC220F7AFA00F4A28C /* ParametersEncoding.swift */,
 			);
 			path = Encoding;
 			sourceTree = "<group>";
@@ -309,12 +318,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8FA49AF220F7DCB00F4A28C /* NetworkError.swift in Sources */,
 				B845D9B721EAFCE700D2C3A5 /* AppDelegate.swift in Sources */,
 				B8CF77D621FBE51300FE5445 /*  FeedViewController.swift in Sources */,
 				B8FA49A9220F775000F4A28C /* HTTPMethod.swift in Sources */,
 				B8FA499D220E61E400F4A28C /* CommentsView.swift in Sources */,
 				B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */,
 				B8FA499B220E60CC00F4A28C /* Int+String+Extension.swift in Sources */,
+				B8FA49AB220F781B00F4A28C /* HTTPTask.swift in Sources */,
 				B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */,
 				B89407AC21FBE9F20034ED81 /* UIView+Extension.swift in Sources */,
 				B8FA49A1220E6BA700F4A28C /* Comment.swift in Sources */,
@@ -322,6 +333,7 @@
 				B8CF77D421FBE08200FE5445 /* NetworkManager.swift in Sources */,
 				B8D3C2DA2200E3D600FAC58C /* Product.swift in Sources */,
 				B84B80202200F7A700FA4B61 /* Constants.swift in Sources */,
+				B8FA49AD220F7AFA00F4A28C /* ParametersEncoding.swift in Sources */,
 				B8FA499F220E62AB00F4A28C /* CommentsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
