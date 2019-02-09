@@ -46,9 +46,7 @@ class FeedViewController: UIViewController{
     
     private func fecthProducts(){
         
-        NetworkManager.getProducts { (productsFromAPI) in
-            self.products = productsFromAPI
-        }
+        // call the Network Manager here boi
     }
     
     lazy var collectionView: UICollectionView = {

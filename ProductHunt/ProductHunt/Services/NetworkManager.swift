@@ -10,6 +10,17 @@ import Foundation
 
 class NetworkManager{
     
+    let urlSession = URLSession.shared
+    enum Result<T> {
+        case success(T)
+        case failure(Error)
+    }
+    
+    enum EndPointError: Error {
+        case couldNotParse
+        case noData
+    }
+    
     
     enum EndPoints {
         case posts
@@ -59,47 +70,83 @@ class NetworkManager{
                 ]
             }
         }
+        
+        func paramsToString() -> String {
+            let parameterArray = getParameters().map { key, value in
+                return "\(key)=\(value)"
+            }
+            
+            return parameterArray.joined(separator: "&")
+        }
     }
     
-    static func getProducts(completion: @escaping([Product]) -> ()){
+    
+    private func makeRequest(for endPoint: EndPoints) -> URLRequest {
         
-        let urlSession = URLSession.shared
-        var baseURL = "https://api.producthunt.com/v1/posts"
-        //let query = "posts/all?sort_by=votes_count&order=desc&search[featured]=true&per_page=20"
-        let fullURL = URL(string: baseURL)!
+        let stringParams = endPoint.paramsToString()
+        let path = endPoint.getPath()
+        let fullURL = URL(string: Constant.PRODUCT_HUNT_API_BASE_URL.appending("\(path)?\(stringParams)"))!
         var request = URLRequest(url: fullURL)
+        request.httpMethod = endPoint.getHttpMethod()
+        request.allHTTPHeaderFields = endPoint.getHeaders()
         
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = [
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(Constant.TOKEN)",
-            "Host": "api.producthunt.com"
-        ]
+        return request
+    }
+    
+    
+    func getPosts(_ completion: @escaping (Result<[Product]>) -> Void) {
         
-        let task = urlSession.dataTask(with: request) { (data, response, error) in
+        
+        let postsRequest = makeRequest(for: .posts)
+        let task = urlSession.dataTask(with: postsRequest) { data, response, error in
+            // Check for errors.
+            if let error = error {
+                return completion(Result.failure(error))
+            }
             
-            if error == nil{
-                
-                guard let unwrappedData = data, let unwrappedResponse = response as? HTTPURLResponse else { return }
-                
-                switch unwrappedResponse.statusCode{
-                    
-                case 200:
-                    
-                    let results = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
-                    guard let unwrappedProducts = results?.posts else { return }
-                    completion(unwrappedProducts)
-                    
-                default:
-                    print("Error with status code \(unwrappedResponse.statusCode)")
-                }
-                
-            }else{
-                print(error?.localizedDescription)
+            // Check to see if there is any data that was retrieved.
+            guard let data = data else {
+                return completion(Result.failure(EndPointError.noData))
+            }
+            
+            // Attempt to decode the data.
+            guard let result = try? JSONDecoder().decode(ProductList.self, from: data) else {
+                return completion(Result.failure(EndPointError.couldNotParse))
+            }
+            
+            let posts = result.posts
+            
+            // Return the result with the completion handler.
+            DispatchQueue.main.async {
+                completion(Result.success(posts))
             }
         }
+        
         task.resume()
     }
     
+    
+    func getComments(_ postId: Int, completion: @escaping (Result<[Comment]>) -> Void) {
+        
+        let commentsRequest = makeRequest(for: .comments(postId: postId))
+        let task = urlSession.dataTask(with: commentsRequest) { data, response, error in
+            if let error = error {
+                return completion(Result.failure(error))
+            }
+            
+            guard let data = data else {
+                return completion(Result.failure(EndPointError.noData))
+            }
+            
+            guard let result = try? JSONDecoder().decode(CommentApiResponse.self, from: data) else {
+                return completion(Result.failure(EndPointError.couldNotParse))
+            }
+            
+            DispatchQueue.main.async {
+                completion(Result.success(result.comments))
+            }
+        }
+        
+        task.resume()
+    }
 }
