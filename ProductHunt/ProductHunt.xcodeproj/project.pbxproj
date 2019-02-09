@@ -22,6 +22,8 @@
 		B8FA499D220E61E400F4A28C /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA499C220E61E400F4A28C /* CommentsView.swift */; };
 		B8FA499F220E62AB00F4A28C /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA499E220E62AB00F4A28C /* CommentsTableViewCell.swift */; };
 		B8FA49A1220E6BA700F4A28C /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A0220E6BA700F4A28C /* Comment.swift */; };
+		B8FA49A5220F766000F4A28C /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A4220F766000F4A28C /* EndpointType.swift */; };
+		B8FA49A9220F775000F4A28C /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA49A8220F775000F4A28C /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		B8FA499C220E61E400F4A28C /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		B8FA499E220E62AB00F4A28C /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		B8FA49A0220E6BA700F4A28C /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		B8FA49A4220F766000F4A28C /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
+		B8FA49A8220F775000F4A28C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +101,7 @@
 			children = (
 				B8CF77D821FBE8C400FE5445 /* Helpers */,
 				B8CF77D721FBE8BD00FE5445 /* Extensions */,
-				B8CF77D221FBDFFC00FE5445 /* Services */,
+				B8CF77D221FBDFFC00FE5445 /* Networking */,
 				B8CF77D121FBDFF400FE5445 /* Controllers */,
 				B8CF77D021FBDFED00FE5445 /* Views */,
 				B8CF77CF21FBDFE300FE5445 /* Models */,
@@ -146,12 +150,16 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		B8CF77D221FBDFFC00FE5445 /* Services */ = {
+		B8CF77D221FBDFFC00FE5445 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B8FA49A7220F772900F4A28C /* Encoding */,
+				B8FA49A6220F771900F4A28C /* Service */,
+				B8FA49A3220F75BD00F4A28C /* Manager */,
+				B8FA49A2220F75A400F4A28C /* Endpoints */,
 				B8CF77D321FBE08200FE5445 /* NetworkManager.swift */,
 			);
-			path = Services;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		B8CF77D721FBE8BD00FE5445 /* Extensions */ = {
@@ -169,6 +177,36 @@
 				B84B801F2200F7A700FA4B61 /* Constants.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B8FA49A2220F75A400F4A28C /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA49A4220F766000F4A28C /* EndpointType.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
+		B8FA49A3220F75BD00F4A28C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B8FA49A6220F771900F4A28C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA49A8220F775000F4A28C /* HTTPMethod.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		B8FA49A7220F772900F4A28C /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Encoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,12 +311,14 @@
 			files = (
 				B845D9B721EAFCE700D2C3A5 /* AppDelegate.swift in Sources */,
 				B8CF77D621FBE51300FE5445 /*  FeedViewController.swift in Sources */,
+				B8FA49A9220F775000F4A28C /* HTTPMethod.swift in Sources */,
 				B8FA499D220E61E400F4A28C /* CommentsView.swift in Sources */,
 				B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */,
 				B8FA499B220E60CC00F4A28C /* Int+String+Extension.swift in Sources */,
 				B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */,
 				B89407AC21FBE9F20034ED81 /* UIView+Extension.swift in Sources */,
 				B8FA49A1220E6BA700F4A28C /* Comment.swift in Sources */,
+				B8FA49A5220F766000F4A28C /* EndpointType.swift in Sources */,
 				B8CF77D421FBE08200FE5445 /* NetworkManager.swift in Sources */,
 				B8D3C2DA2200E3D600FAC58C /* Product.swift in Sources */,
 				B84B80202200F7A700FA4B61 /* Constants.swift in Sources */,
