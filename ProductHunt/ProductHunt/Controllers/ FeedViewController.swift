@@ -83,7 +83,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Cell at \(indexPath.row) selected")
+        let selectedProduct = products[indexPath.row]
+        let destinationVC = CommentsView()
+        destinationVC.comments.append("lalal")
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
