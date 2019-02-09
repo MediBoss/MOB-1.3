@@ -27,6 +27,38 @@ class NetworkManager{
         func getHttpMethod() -> String{
             return "GET"
         }
+        
+        func getHeaders() -> [String: String]{
+            return [
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer \(Constant.TOKEN)",
+                "Host": "api.producthunt.com"
+            ]
+        }
+        
+        func getParameters() -> [String: String]{
+            
+            switch self {
+            case .posts:
+                return [
+                    "sort_by": "votes_count",
+                    "order": "desc",
+                    "per_page": "20",
+                    
+                    "search[featured]": "true"
+                ]
+                
+            case let .comments(postId):
+                return [
+                    "sort_by": "votes",
+                    "order": "asc",
+                    "per_page": "20",
+                    
+                    "search[post_id]": "\(postId)"
+                ]
+            }
+        }
     }
     
     static func getProducts(completion: @escaping([Product]) -> ()){
