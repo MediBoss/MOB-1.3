@@ -10,22 +10,19 @@ import Foundation
 
 class NetworkManager{
     
-    // Propertes
-    let urlSession = URLSession.shared
-    var baseURL = "https://api.producthunt.com/v1/"
-    var token = Constant.API_KEY
-    
-    func getProducts(completion: @escaping([Product]) -> ()){
+    static func getProducts(completion: @escaping([Product]) -> ()){
         
-        let query = "posts/all?sort_by=votes_count&order=desc&search[featured]=true&per_page=20"
-        let fullURL = URL(string: baseURL + query)!
+        let urlSession = URLSession.shared
+        var baseURL = "https://api.producthunt.com/v1/posts"
+        //let query = "posts/all?sort_by=votes_count&order=desc&search[featured]=true&per_page=20"
+        let fullURL = URL(string: baseURL)!
         var request = URLRequest(url: fullURL)
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = [
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Bearer \(token)",
+            "Authorization": "Bearer \(Constant.TOKEN)",
             "Host": "api.producthunt.com"
         ]
         
@@ -39,12 +36,11 @@ class NetworkManager{
                     
                 case 200:
                     
-                    guard let products = try? JSONDecoder().decode([Product].self, from: unwrappedData) else{
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        completion(products)
-                    }
+                    let products = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
+                    print(products)
+//                    DispatchQueue.main.async {
+//                        completion(products)
+//                    }
                 default:
                     print("Error with status code \(unwrappedResponse.statusCode)")
                 }

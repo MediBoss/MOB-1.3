@@ -19,8 +19,14 @@ struct Product{
     let previewImageURL: String
 }
 
+struct ProductList: Decodable {
+    let posts : [Product]
+}
 extension Product: Decodable{
     
+//    enum mainKey: String, CodingKey{
+//        case posts = "posts"
+//    }
     enum ProductKeys: String, CodingKey{
         
         case id = "id"
@@ -38,13 +44,14 @@ extension Product: Decodable{
     init(from decoder: Decoder) throws {
         
         let productsContainer = try decoder.container(keyedBy: ProductKeys.self)
-        let productThumbnailContainer = try productsContainer.nestedContainer(keyedBy: PreviewImageURLKeys.self, forKey: .thumbnailURL)
         
         id = try productsContainer.decode(Int.self, forKey: .id)
         name = try productsContainer.decode(String.self, forKey: .name)
         tagline = try productsContainer.decode(String.self, forKey: .tagline)
         votesCount = try productsContainer.decode(Int.self, forKey: .voteCounts)
         commentsCount = try productsContainer.decode(Int.self, forKey: .commentCounts)
+        
+        let productThumbnailContainer = try productsContainer.nestedContainer(keyedBy: PreviewImageURLKeys.self, forKey: .thumbnailURL)
         previewImageURL = try productThumbnailContainer.decode(String.self, forKey: .imageURL)
     }
 }

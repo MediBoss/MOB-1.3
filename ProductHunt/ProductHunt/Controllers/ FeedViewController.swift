@@ -10,12 +10,22 @@ import UIKit
 
 class FeedViewController: UIViewController{
     
+    
+    var products = [Product](){
+        didSet{
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .blue
         view.addSubview(collectionView)
         anchorFeedCollectionView()
+        fecthProducts()
     }
     
     
@@ -32,6 +42,13 @@ class FeedViewController: UIViewController{
                                width: 0,
                                height: 0,
                                enableInsets: false)
+    }
+    
+    private func fecthProducts(){
+        
+        NetworkManager.getProducts { (products) in
+            print("complete")
+        }
     }
     
     lazy var collectionView: UICollectionView = {
