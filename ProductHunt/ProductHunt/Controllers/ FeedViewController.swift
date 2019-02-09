@@ -24,6 +24,7 @@ class FeedViewController: UIViewController{
         self.view.backgroundColor = .blue
         view.addSubview(collectionView)
         anchorFeedCollectionView()
+        updateFeed()
     }
     
     

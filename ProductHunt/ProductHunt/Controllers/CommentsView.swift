@@ -73,7 +73,7 @@ class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: CommentsTableViewCell.id, for: indexPath) as! CommentsTableViewCell
         
         let comment = comments[indexPath.row]
-        cell.commentBody.text = comment
+        cell.commentBody.text = comment.body
         
         return cell
     }

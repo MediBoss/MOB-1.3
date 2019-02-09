@@ -21,6 +21,8 @@ class NetworkManager{
     enum EndPointError: Error {
         case couldNotParse
         case noData
+        case HTTPResponseError
+        case FragmentResponse
     }
     
     
@@ -99,29 +101,40 @@ class NetworkManager{
     func getPosts(_ completion: @escaping (Result<[Product]>) -> Void) {
         
         
-        let postsRequest = makeRequest(for: .posts)
-        let task = urlSession.dataTask(with: postsRequest) { data, response, error in
+        let request = makeRequest(for: .posts)
+        let task = urlSession.dataTask(with: request) { data, response, error in
             // Check for errors.
             if let error = error {
                 return completion(Result.failure(error))
             }
             
-            // Check to see if there is any data that was retrieved.
-            guard let data = data else {
-                return completion(Result.failure(EndPointError.noData))
+            if error == nil{
+                
+                guard let unwrappedData = data, let unwrappedResponse = response as? HTTPURLResponse else { return completion(Result.failure(EndPointError.noData)) }
+                
+                switch unwrappedResponse.statusCode{
+                    
+                case 200:
+                    
+                    let results = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
+                    guard let products = results?.posts else { return completion(Result.failure(EndPointError.FragmentResponse))}
+                    completion(Result.success(products))
+                    
+                case 400:
+                    print("Bad Request")
+                case 401:
+                    print("Unauthorize Request")
+                    
+                default:
+                    print("Server Side error")
+                }
+                
+            }else{
+                
+                // If an erro was found during the API Request
+                return completion(Result.failure(error!))
             }
             
-            // Attempt to decode the data.
-            guard let result = try? JSONDecoder().decode(ProductList.self, from: data) else {
-                return completion(Result.failure(EndPointError.couldNotParse))
-            }
-            
-            let posts = result.posts
-            
-            // Return the result with the completion handler.
-            DispatchQueue.main.async {
-                completion(Result.success(posts))
-            }
         }
         
         task.resume()
