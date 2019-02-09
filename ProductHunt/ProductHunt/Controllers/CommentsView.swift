@@ -11,13 +11,19 @@ import UIKit
 class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
-    var comments: [String]!
+    var comments: [Comment] = []{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    var productID: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(tableView)
         anchorCommentsTableView()
+        updateComments()
     }
     
     
@@ -34,6 +40,17 @@ class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource
                               width: 0,
                               height: 0,
                               enableInsets: false)
+    }
+    
+    func updateComments() {
+        NetworkManager.shared.getComments(productID) { result in
+            switch result {
+            case let .success(comments):
+                self.comments = comments
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
     
     lazy var tableView: UITableView = {

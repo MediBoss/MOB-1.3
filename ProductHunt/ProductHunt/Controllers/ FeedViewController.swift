@@ -10,7 +10,6 @@ import UIKit
 
 class FeedViewController: UIViewController{
     
-    
     var products = [Product](){
         didSet{
             DispatchQueue.main.async {
@@ -25,7 +24,6 @@ class FeedViewController: UIViewController{
         self.view.backgroundColor = .blue
         view.addSubview(collectionView)
         anchorFeedCollectionView()
-        fecthProducts()
     }
     
     
@@ -44,9 +42,15 @@ class FeedViewController: UIViewController{
                                enableInsets: false)
     }
     
-    private func fecthProducts(){
-        
-        // call the Network Manager here boi
+    func updateFeed() {
+        NetworkManager.shared.getPosts() { result in
+            switch result {
+            case let .success(products):
+                self.products = products
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
     
     lazy var collectionView: UICollectionView = {
@@ -83,7 +87,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedProduct = products[indexPath.row]
         let destinationVC = CommentsView()
-        //destinationVC.comments = selectedProduct.
+        destinationVC.productID = selectedProduct.id
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     

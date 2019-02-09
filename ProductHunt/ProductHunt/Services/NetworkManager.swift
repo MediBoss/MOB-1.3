@@ -10,6 +10,8 @@ import Foundation
 
 class NetworkManager{
     
+    static let shared =  NetworkManager()
+    
     let urlSession = URLSession.shared
     enum Result<T> {
         case success(T)
