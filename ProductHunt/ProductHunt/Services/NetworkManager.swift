@@ -10,6 +10,25 @@ import Foundation
 
 class NetworkManager{
     
+    
+    enum EndPoints {
+        case posts
+        case comments(postId: Int)
+        
+        func getPath() -> String{
+            switch self {
+            case .posts:
+                return "posts/all"
+            case .comments:
+                return "comments"
+            }
+        }
+        
+        func getHttpMethod() -> String{
+            return "GET"
+        }
+    }
+    
     static func getProducts(completion: @escaping([Product]) -> ()){
         
         let urlSession = URLSession.shared

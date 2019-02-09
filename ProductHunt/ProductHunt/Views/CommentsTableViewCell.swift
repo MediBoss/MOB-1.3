@@ -13,8 +13,10 @@ class CommentsTableViewCell: UITableViewCell {
     open var commentBody = UITextView()
     static let id = "commentCell"
     
-    init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setUpTextView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,9 +26,10 @@ class CommentsTableViewCell: UITableViewCell {
     
     func setUpTextView(){
         
+        addSubview(commentBody)
+        
         commentBody.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: false)
         
-        addSubview(commentBody)
     }
 
 }

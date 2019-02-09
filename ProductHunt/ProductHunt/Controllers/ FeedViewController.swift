@@ -85,7 +85,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedProduct = products[indexPath.row]
         let destinationVC = CommentsView()
-        destinationVC.comments.append("lalal")
+        //destinationVC.comments = selectedProduct.
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     

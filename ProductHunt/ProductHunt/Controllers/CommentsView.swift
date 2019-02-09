@@ -16,7 +16,8 @@ class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        view.addSubview(tableView)
+        anchorCommentsTableView()
     }
     
     
