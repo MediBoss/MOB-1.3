@@ -36,11 +36,10 @@ class NetworkManager{
                     
                 case 200:
                     
-                    let products = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
-                    print(products)
-//                    DispatchQueue.main.async {
-//                        completion(products)
-//                    }
+                    let results = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
+                    guard let unwrappedProducts = results?.posts else { return }
+                    completion(unwrappedProducts)
+                    
                 default:
                     print("Error with status code \(unwrappedResponse.statusCode)")
                 }

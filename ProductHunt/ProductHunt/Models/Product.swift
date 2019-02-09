@@ -24,9 +24,6 @@ struct ProductList: Decodable {
 }
 extension Product: Decodable{
     
-//    enum mainKey: String, CodingKey{
-//        case posts = "posts"
-//    }
     enum ProductKeys: String, CodingKey{
         
         case id = "id"

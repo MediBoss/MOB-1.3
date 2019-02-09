@@ -18,6 +18,7 @@
 		B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3C2D52200D3B800FAC58C /* FeedViewCell.swift */; };
 		B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3C2D72200D50A00FAC58C /* CustomViews.swift */; };
 		B8D3C2DA2200E3D600FAC58C /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D3C2D92200E3D600FAC58C /* Product.swift */; };
+		B8FA499B220E60CC00F4A28C /* Int+String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FA499A220E60CC00F4A28C /* Int+String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		B8D3C2D52200D3B800FAC58C /* FeedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewCell.swift; sourceTree = "<group>"; };
 		B8D3C2D72200D50A00FAC58C /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		B8D3C2D92200E3D600FAC58C /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		B8FA499A220E60CC00F4A28C /* Int+String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				B89407AB21FBE9F20034ED81 /* UIView+Extension.swift */,
+				B8FA499A220E60CC00F4A28C /* Int+String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				B845D9B721EAFCE700D2C3A5 /* AppDelegate.swift in Sources */,
 				B8CF77D621FBE51300FE5445 /*  FeedViewController.swift in Sources */,
 				B8D3C2D62200D3B800FAC58C /* FeedViewCell.swift in Sources */,
+				B8FA499B220E60CC00F4A28C /* Int+String+Extension.swift in Sources */,
 				B8D3C2D82200D50A00FAC58C /* CustomViews.swift in Sources */,
 				B89407AC21FBE9F20034ED81 /* UIView+Extension.swift in Sources */,
 				B8CF77D421FBE08200FE5445 /* NetworkManager.swift in Sources */,

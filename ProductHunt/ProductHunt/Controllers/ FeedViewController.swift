@@ -46,8 +46,8 @@ class FeedViewController: UIViewController{
     
     private func fecthProducts(){
         
-        NetworkManager.getProducts { (products) in
-            print("complete")
+        NetworkManager.getProducts { (productsFromAPI) in
+            self.products = productsFromAPI
         }
     }
     
@@ -70,8 +70,14 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedViewCell.identifier, for: indexPath)
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedViewCell.identifier, for: indexPath) as! FeedViewCell
+        
+        var currentProduct = products[indexPath.row]
+        cell.productNameLabel.text = currentProduct.name
+        cell.productCommentsLabel.text = currentProduct.commentsCount.toString()
+        cell.productTagLineLabel.text = currentProduct.tagline
+        cell.productVotesCountLabel.text = currentProduct.votesCount.toString()
+        
         return cell
     }
     
@@ -81,7 +87,7 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return products.count
     }
     
 }
