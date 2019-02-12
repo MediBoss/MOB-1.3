@@ -38,8 +38,8 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
             
             switch endpoint.task {
             case .request:
-                request.setValue("application/", forHTTPHeaderField: <#T##String#>)
-                // if the task is a request
+                // set the header value if the task is a request
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 
             case .requestParameters(bodyParameters: let bodyParameters,
                                     urlParameters: let urlParameters):
@@ -49,7 +49,14 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
                                              request: &request)
                 // if we need to configure the parameters
                 
-            case .requestParametersAndHeaders(bodyParameters: <#T##Parameters?#>, urlParameters: <#T##Parameters?#>, additionHeaders: <#T##HTTPHeaders?#>)
+            case .requestParametersAndHeaders(bodyParameters: let bodyParameters,
+                                              urlParameters: let urlParameters,
+                                              additionHeaders: let additionalParameters):
+                
+                self.addAdditionalHeaders(for: additionalParameters, request: &request)
+                try self.configureParameters(bodyParametes: bodyParameters,
+                                             urlParameters: urlParameters,
+                                             request: &request)
             default:
                 <#code#>
             }
@@ -73,6 +80,15 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
             }
         } catch {
             throw error
+        }
+    }
+    
+    // Appends additional http headers besides application/headers
+    fileprivate func addAdditionalHeaders(for headers: HTTPHeaders?, request: inout URLRequest){
+        
+        guard let unwrappedHeaders = headers else { return }
+        for (key,value) in unwrappedHeaders{
+            request.setValue(value, forHTTPHeaderField: key)
         }
     }
 }

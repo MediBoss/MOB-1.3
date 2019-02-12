@@ -11,10 +11,16 @@ import Foundation
 public typealias HTTPHeaders = [String: String]
 public enum HTTPTask {
     
+    // Used when the task is to make an HTTP Request
     case request
+    // Used when the task is to download data from a server
     case download
+    // Used when the task is to upload data to a server
     case upload
     
+    // Used for http request that comes with parameters only
     case requestParameters(bodyParameters: Parameters?, urlParameters: Parameters?)
+    
+    // Used for http request that comes with parameters and headers
     case requestParametersAndHeaders(bodyParameters: Parameters?,urlParameters: Parameters?, additionHeaders: HTTPHeaders?)
 }
