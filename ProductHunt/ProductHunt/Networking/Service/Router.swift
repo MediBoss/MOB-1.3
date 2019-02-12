@@ -12,18 +12,24 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
     
     private var task: URLSessionTask?
     
-    func request(_ route: Router<Endpoint>.Endpoint, completion: @escaping NetworkRouterCompletion) {
+    func request(_ route: Endpoint, completion: @escaping NetworkRouterCompletion) {
         
         let session = URLSession.shared
         do{
+            let request = try self.buildRequest(from: route)
+            task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+                completion(data, response, error)
+            })
             
         }catch {
             completion(nil, nil, error)
         }
+        
+        self.task?.resume()
     }
     
     func cancel() {
-        // code to cancel a network request
+        self.task?.cancel()
     }
     
     private func buildRequest(from endpoint: EndpointTypeDelegate) throws -> URLRequest {
@@ -58,8 +64,10 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
                                              urlParameters: urlParameters,
                                              request: &request)
             default:
-                <#code#>
+                print("Unknown error occured when building the request")
             }
+            
+            return request
         } catch {
             throw error
         }
@@ -90,5 +98,9 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
         for (key,value) in unwrappedHeaders{
             request.setValue(value, forHTTPHeaderField: key)
         }
+    }
+    
+    func exists<T: Equatable>(item: T, array: [T]) -> {
+        
     }
 }
