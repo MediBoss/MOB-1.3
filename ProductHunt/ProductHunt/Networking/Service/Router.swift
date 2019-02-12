@@ -38,15 +38,38 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
             
             switch endpoint.task {
             case .request:
-                
+                request.setValue("application/", forHTTPHeaderField: <#T##String#>)
                 // if the task is a request
                 
-            case .requestParameters(bodyParameters: <#T##Parameters?#>, urlParameters: <#T##Parameters?#>):
+            case .requestParameters(bodyParameters: let bodyParameters,
+                                    urlParameters: let urlParameters):
+                
+                try self.configureParameters(bodyParametes: bodyParameters,
+                                             urlParameters: urlParameters,
+                                             request: &request)
                 // if we need to configure the parameters
                 
             case .requestParametersAndHeaders(bodyParameters: <#T##Parameters?#>, urlParameters: <#T##Parameters?#>, additionHeaders: <#T##HTTPHeaders?#>)
             default:
                 <#code#>
+            }
+        } catch {
+            throw error
+        }
+    }
+    
+    // Configures the parameters by encoding them
+    fileprivate func configureParameters(bodyParametes: Parameters?,
+                                         urlParameters: Parameters?,
+                                         request: inout URLRequest) throws {
+        
+        do {
+            if let bodyParameters = bodyParametes {
+                try JSONParameterEncoder.encode(urlRequest: &request, with: bodyParameters)
+            }
+            
+            if let urlParameters = urlParameters {
+                try URLParameterEncoder.encode(urlRequest: &request, with: urlParameters)
             }
         } catch {
             throw error

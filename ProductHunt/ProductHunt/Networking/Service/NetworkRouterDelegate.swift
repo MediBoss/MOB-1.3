@@ -12,7 +12,7 @@ public typealias NetworkRouterCompletion = (_ data: Data?, _ response: URLRespon
 
 protocol NetworkRouterDelegate: class {
     
-    associatedtype Endpoint: EnpointTypeDelegate
+    associatedtype Endpoint: EndpointTypeDelegate
     func request(_ route: Endpoint, completion: @escaping NetworkRouterCompletion)
     func cancel()
 }
