@@ -1,5 +1,5 @@
 //
-//  ParametersEncoding.swift
+//  ParameterEncoderDelegate.swift
 //  ProductHunt
 //
 //  Created by Medi Assumani on 2/9/19.
@@ -10,6 +10,6 @@ import Foundation
 
 public typealias Parameters = [String: Any]
 
-protocol ParameterEncoder {
+protocol ParameterEncoderDelegate {
     static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
 }

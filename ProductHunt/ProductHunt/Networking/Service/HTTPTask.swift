@@ -15,6 +15,6 @@ public enum HTTPTask {
     case download
     case upload
     
-    case requestParameters(bodyParameters: Parameters?), urlParameters: Parameters?)
+    case requestParameters(bodyParameters: Parameters?, urlParameters: Parameters?)
     case requestParametersAndHeaders(bodyParameters: Parameters?,urlParameters: Parameters?, additionHeaders: HTTPHeaders?)
 }

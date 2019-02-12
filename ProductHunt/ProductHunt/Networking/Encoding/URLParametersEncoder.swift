@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct URLParameterEncoder: ParameterEncoder {
+public struct URLParameterEncoder: ParameterEncoderDelegate {
     
     // Method to clean and encode the parameters of a url request
     static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {

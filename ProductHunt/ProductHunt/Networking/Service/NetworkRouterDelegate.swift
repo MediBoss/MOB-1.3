@@ -1,5 +1,5 @@
 //
-//  NetworkRouter.swift
+//  NetworkRouterDelegate.swift.swift
 //  ProductHunt
 //
 //  Created by Medi Assumani on 2/9/19.
@@ -9,9 +9,10 @@
 import Foundation
 
 public typealias NetworkRouterCompletion = (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> ()
-protocol NetworkRouter: class {
+
+protocol NetworkRouterDelegate: class {
     
-    associatedtype Endpoint: EnpointType
+    associatedtype Endpoint: EnpointTypeDelegate
     func request(_ route: Endpoint, completion: @escaping NetworkRouterCompletion)
     func cancel()
 }

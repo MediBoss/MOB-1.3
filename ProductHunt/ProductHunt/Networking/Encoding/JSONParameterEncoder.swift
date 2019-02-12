@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct JSONParameterEncoder: ParameterEncoder{
+public struct JSONParameterEncoder: ParameterEncoderDelegate{
     
     static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
         do{
