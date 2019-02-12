@@ -99,8 +99,4 @@ class Router<Endpoint: EndpointTypeDelegate>: NetworkRouterDelegate{
             request.setValue(value, forHTTPHeaderField: key)
         }
     }
-    
-    func exists<T: Equatable>(item: T, array: [T]) -> {
-        
-    }
 }
