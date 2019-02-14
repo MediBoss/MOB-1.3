@@ -8,43 +8,49 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    @IBOutlet weak var nasaDailyImageView: UIImageView!
-    
+    var incrementNumber = 2
+    @IBOutlet weak var tableview: UITableView!
+    var peopleVariable = [Person](){
+        didSet{
+            DispatchQueue.main.async {
+                self.tableview.reloadData()
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         //fetchHeaderData()
         //fetchNasaDailyImage()
-        fetchStarWars()
+        fetchStarWars(page: 1)
         //TODO: Call function to fetch image data here
         
     }
-
-    //MARK: Data Fetch functions
     
-//    func fetchHeaderData() {
-//
-//        let defaultSession = URLSession(configuration: .default)
-//
-//        // Create URL
-//        let url = URL(string: "https://httpbin.org/headers")
-//
-//        // Create Request
-//        let request = URLRequest(url: url!)
-//
-//        // Create Data Task
-//        let dataTask = defaultSession.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
-//
-//            print("data is: ", data!)
-//            print("response is: ", response!)
-//
-//        })
-//        dataTask.resume()
-//    }
+    
+    // ACTIVITY I
+    func fetchHeaderData() {
 
-     // CODE BASE for In-Class Activity I
+        let defaultSession = URLSession(configuration: .default)
+
+        // Create URL
+        let url = URL(string: "https://httpbin.org/headers")
+
+        // Create Request
+        let request = URLRequest(url: url!)
+
+        // Create Data Task
+        let dataTask = defaultSession.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+
+            print("data is: ", data!)
+            print("response is: ", response!)
+
+        })
+        dataTask.resume()
+    }
+
+     // Activity II
     func fetchNasaDailyImage() {
      
         //TODO: Create session configuration here
@@ -76,7 +82,7 @@ class ViewController: UIViewController {
                                 
                                 //TODO: Insert downloaded image into imageView
                                 DispatchQueue.main.async {
-                                    self.nasaDailyImageView.image = image
+                                    //self.nasaDailyImageView.image = image
                                 }
                             }
                         }
@@ -88,10 +94,11 @@ class ViewController: UIViewController {
     }
     
     
-    func fetchStarWars(){
+    // Activity III
+    func fetchStarWars(page: Int){
         
         let session = URLSession(configuration: .default)
-        let url = URL(string: "https://swapi.co/api/starships/")
+        let url = URL(string: "https://swapi.co/api/people/")
         let request = URLRequest(url: url!)
         
         session.dataTask(with: request) { (data, res, err) in
@@ -104,8 +111,9 @@ class ViewController: UIViewController {
                         if mime == "application/json"{
                             
                             do{
-                                let result = try JSONSerialization.jsonObject(with: unwrappedData, options: [])
-                                print(result)
+                                let result = try JSONDecoder().decode(People.self, from: unwrappedData)
+                                guard let people = result.results else { return }
+                                self.peopleVariable = people
                             }catch{
                                 print("Error Found")
                             }
@@ -116,6 +124,61 @@ class ViewController: UIViewController {
             }
         }
         .resume()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return peopleVariable.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableview.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! HomePageTableViewCell
+        let currPerson = peopleVariable[indexPath.row]
+        
+        cell.nameLabel.text = currPerson.name
+        cell.genderLabel.text = currPerson.gender
+        cell.heightLabel.text = currPerson.height
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let lastItemIndex = peopleVariable.count - 1
+        if indexPath.item == lastItemIndex {
+            loadMoreStarWarsPeople(number: incrementNumber)
+        }
+    }
+    
+    func loadMoreStarWarsPeople(number: Int){
+        
+        let nextPageURL = "https://swapi.co/api/people/?page=\(number)"
+        fetchStarWars(page: number)
+    }
+    
+    func fetchMoreStarWars(with url: String){
+        
+        let session = URLSession(configuration: .default)
+        if let url = URL(string: url){
+            let request = URLRequest(url: url)
+            
+            let dataTask = session.dataTask(with: request) { (data, res, err) -> Void in
+                
+                if err == nil{
+                    guard let response = res as? HTTPURLResponse, let unwrappedata = data else { return }
+                    if response.statusCode == 200{
+                        
+                        do{
+                            let result = try JSONDecoder().decode(Person.self, from: unwrappedata)
+                        } catch{
+                            print("Error Decoding data \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+            
+            dataTask.resume()
+        }
     }
 }
 

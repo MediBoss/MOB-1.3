@@ -13,6 +13,8 @@
 		44649B49220CB8BA008F8866 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44649B48220CB8BA008F8866 /* Assets.xcassets */; };
 		44649B4C220CB8BA008F8866 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44649B4A220CB8BA008F8866 /* LaunchScreen.storyboard */; };
 		44649B62220CB8BA008F8866 /* DailyPlanetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44649B61220CB8BA008F8866 /* DailyPlanetUITests.swift */; };
+		B8276A622213AF07009D78D6 /* HomePageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8276A612213AF07009D78D6 /* HomePageTableViewCell.swift */; };
+		B8276A642213AFDA009D78D6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8276A632213AFDA009D78D6 /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		44649B5D220CB8BA008F8866 /* DailyPlanetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyPlanetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		44649B61220CB8BA008F8866 /* DailyPlanetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPlanetUITests.swift; sourceTree = "<group>"; };
 		44649B63220CB8BA008F8866 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8276A612213AF07009D78D6 /* HomePageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewCell.swift; sourceTree = "<group>"; };
+		B8276A632213AFDA009D78D6 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 				44649B48220CB8BA008F8866 /* Assets.xcassets */,
 				44649B4A220CB8BA008F8866 /* LaunchScreen.storyboard */,
 				44649B4D220CB8BA008F8866 /* Info.plist */,
+				B8276A612213AF07009D78D6 /* HomePageTableViewCell.swift */,
+				B8276A632213AFDA009D78D6 /* Person.swift */,
 			);
 			path = DailyPlanet;
 			sourceTree = "<group>";
@@ -254,6 +260,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				44649B44220CB8B8008F8866 /* ViewController.swift in Sources */,
+				B8276A622213AF07009D78D6 /* HomePageTableViewCell.swift in Sources */,
+				B8276A642213AFDA009D78D6 /* Person.swift in Sources */,
 				44649B42220CB8B8008F8866 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
