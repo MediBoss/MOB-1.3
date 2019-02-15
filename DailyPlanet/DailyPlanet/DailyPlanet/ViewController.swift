@@ -142,11 +142,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    // gets called everytime user scroll
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let lastItemIndex = peopleVariable.count - 1
-        if indexPath.item == lastItemIndex {
+        let lastItem = peopleVariable.count - 1
+        if indexPath.row == lastItem{
             loadMoreStarWarsPeople(number: incrementNumber)
+            if incrementNumber <= 8{
+                incrementNumber += 1
+            }
         }
     }
     
@@ -170,6 +174,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         do{
                             let result = try JSONDecoder().decode(Person.self, from: unwrappedata)
+                            
                         } catch{
                             print("Error Decoding data \(error.localizedDescription)")
                         }
