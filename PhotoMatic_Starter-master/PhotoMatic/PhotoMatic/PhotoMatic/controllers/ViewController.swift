@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var collectionView: UICollectionView!
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    let activityIndicator = UIActivityIndicatorView()
     
     //TODO: Insert your API Key here
     private let APIKey = "1cb34e6cefb9e60677d9d0df41d0891e"
@@ -56,12 +56,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(activityIndicator)
-        activityIndicator.center = view.center
+        configureAcivityIndicator()
         collectionView.dataSource = self
         collectionView.delegate = self
+        reloadDataSource()
+    }
+    
+    func configureAcivityIndicator(){
         
-         reloadDataSource()
+        activityIndicator.style = .gray
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
     }
     
     
