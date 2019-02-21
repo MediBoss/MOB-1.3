@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias Parameters = [String: Any]
-
 protocol ParameterEncoderDelegate {
-    static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws
+    static func encode(urlRequest: inout URLRequest, with parameters: HTTPParameters) throws
 }

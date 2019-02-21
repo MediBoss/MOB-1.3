@@ -11,15 +11,15 @@ import Foundation
 public struct URLParameterEncoder: ParameterEncoderDelegate {
     
     // Method to clean and encode the parameters of a url request
-    static func encode(urlRequest: inout URLRequest, with parameters: Parameters) throws {
+    static func encode(urlRequest: inout URLRequest, with parameters: HTTPParameters) throws {
         
-        guard let url = urlRequest.url else { throw NetworkError.missingURL }
+        guard let url = urlRequest.url else { throw HTTPNetworkError.missingURL }
         
         if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
             urlComponents.queryItems = [URLQueryItem]()
             
             for (key,value) in parameters {
-               let queryItem = URLQueryItem(name: key, value: "\(value)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))
+               let queryItem = URLQueryItem(name: key, value: "\(value)")
                 
                 urlComponents.queryItems?.append(queryItem)
             }
@@ -27,8 +27,10 @@ public struct URLParameterEncoder: ParameterEncoderDelegate {
             urlRequest.url = urlComponents.url
         }
         
+        // sets the header of the request if it's emmpty
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-TYPE")
         }
     }
+
 }

@@ -23,7 +23,7 @@ class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         view.addSubview(tableView)
         anchorCommentsTableView()
-        updateComments()
+        //updateComments()
     }
     
     
@@ -41,17 +41,17 @@ class CommentsView: UIViewController, UITableViewDelegate, UITableViewDataSource
                               height: 0,
                               enableInsets: false)
     }
-    
-    func updateComments() {
-        NetworkManager.shared.getComments(productID) { result in
-            switch result {
-            case let .success(comments):
-                self.comments = comments
-            case let .failure(error):
-                print(error)
-            }
-        }
-    }
+//    
+//    func updateComments() {
+//        NetworkManager.shared.getComments(productID) { result in
+//            switch result {
+//            case let .success(comments):
+//                self.comments = comments
+//            case let .failure(error):
+//                print(error)
+//            }
+//        }
+//    }
     
     lazy var tableView: UITableView = {
         

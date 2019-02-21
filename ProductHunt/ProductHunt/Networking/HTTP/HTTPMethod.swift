@@ -8,7 +8,6 @@
 
 import Foundation
 
-// The enumeration defines the types of request we might make
 public enum HTTPMethod: String{
     
     case get = "GET"

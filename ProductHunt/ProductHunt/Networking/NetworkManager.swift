@@ -13,17 +13,6 @@ class NetworkManager{
     static let shared =  NetworkManager()
     
     let urlSession = URLSession.shared
-    enum Result<T> {
-        case success(T)
-        case failure(Error)
-    }
-    
-    enum EndPointError: Error {
-        case couldNotParse
-        case noData
-        case HTTPResponseError
-        case FragmentResponse
-    }
     
     
     enum EndPoints {
@@ -98,70 +87,34 @@ class NetworkManager{
     }
     
     
-    func getPosts(_ completion: @escaping (Result<[Product]>) -> Void) {
+    func getPosts(_ completion: @escaping (Result<[Product]>,_ error: String?) -> Void) {
         
         
-        let request = makeRequest(for: .posts)
-        let task = urlSession.dataTask(with: request) { data, response, error in
-            // Check for errors.
-            if let error = error {
-                return completion(Result.failure(error))
-            }
-            
-            if error == nil{
-                
-                guard let unwrappedData = data, let unwrappedResponse = response as? HTTPURLResponse else { return completion(Result.failure(EndPointError.noData)) }
-                
-                switch unwrappedResponse.statusCode{
-                    
-                case 200:
-                    
-                    let results = try? JSONDecoder().decode(ProductList.self, from: unwrappedData)
-                    guard let products = results?.posts else { return completion(Result.failure(EndPointError.FragmentResponse))}
-                    completion(Result.success(products))
-                    
-                case 400:
-                    print("Bad Request")
-                case 401:
-                    print("Unauthorize Request")
-                    
-                default:
-                    print("Server Side error")
-                }
-                
-            }else{
-                
-                // If an erro was found during the API Request
-                return completion(Result.failure(error!))
-            }
-            
-        }
         
-        task.resume()
     }
     
     
-    func getComments(_ postId: Int, completion: @escaping (Result<[Comment]>) -> Void) {
-        
-        let commentsRequest = makeRequest(for: .comments(postId: postId))
-        let task = urlSession.dataTask(with: commentsRequest) { data, response, error in
-            if let error = error {
-                return completion(Result.failure(error))
-            }
-            
-            guard let data = data else {
-                return completion(Result.failure(EndPointError.noData))
-            }
-            
-            guard let result = try? JSONDecoder().decode(CommentApiResponse.self, from: data) else {
-                return completion(Result.failure(EndPointError.couldNotParse))
-            }
-            
-            DispatchQueue.main.async {
-                completion(Result.success(result.comments))
-            }
-        }
-        
-        task.resume()
-    }
+//    func getComments(_ postId: Int, completion: @escaping (Result<[Comment]>) -> Void) {
+//
+//        let commentsRequest = makeRequest(for: .comments(postId: postId))
+//        let task = urlSession.dataTask(with: commentsRequest) { data, response, error in
+//            if let error = error {
+//                return completion(Result.failure(error))
+//            }
+//
+//            guard let data = data else {
+//                return completion(Result.failure(EndPointError.noData))
+//            }
+//
+//            guard let result = try? JSONDecoder().decode(CommentApiResponse.self, from: data) else {
+//                return completion(Result.failure(EndPointError.couldNotParse))
+//            }
+//
+//            DispatchQueue.main.async {
+//                completion(Result.success(result.comments))
+//            }
+//        }
+//
+//        task.resume()
+//    }
 }
