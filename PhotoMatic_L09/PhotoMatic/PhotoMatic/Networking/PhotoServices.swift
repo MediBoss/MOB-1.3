@@ -57,11 +57,20 @@ struct PhotoServices{
         
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
-            
-            let result = self.processImageRequest(data: data, error: error)
-            
-            OperationQueue.main.addOperation {
-                completion(result)
+            if error == nil{
+                
+                guard let unwrappedData = data, let unwrappedResponse = response as? HTTPURLResponse else { return }
+                
+                if unwrappedResponse.statusCode == 200 {
+                    let result = self.processImageRequest(data: data, error: error)
+                    
+                    OperationQueue.main.addOperation {
+                        completion(result)
+                    }
+                }
+                
+            }else {
+                print("Errror Found while making API request")
             }
         }
         task.resume()
