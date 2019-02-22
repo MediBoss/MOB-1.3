@@ -67,6 +67,8 @@ struct PhotoServices{
                     OperationQueue.main.addOperation {
                         completion(result)
                     }
+                } else {
+                    print("Error found with code : \(unwrappedResponse.statusCode)")
                 }
                 
             }else {
@@ -115,11 +117,24 @@ struct PhotoServices{
         let task = session.dataTask(with: request, completionHandler: {
             (data, response, error) -> Void in
             
-            let result = self.processPhotoFetchRequest(data: data, error: error)
-            
-            OperationQueue.main.addOperation {
-                completion(result)
+            if error == nil{
+                
+                guard let unwrappedData = data, let unwrappedResponse = response as? HTTPURLResponse else { return }
+                
+                if unwrappedResponse.statusCode == 200 {
+                    let result = self.processPhotoFetchRequest(data: data, error: error)
+                    
+                    OperationQueue.main.addOperation {
+                        completion(result)
+                    }
+                } else {
+                    print("Error found with code : \(unwrappedResponse.statusCode)")
+                }
+                
+            }else {
+                print("Errror Found while making API request")
             }
+
         })
         task.resume()
     }
