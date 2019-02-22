@@ -38,21 +38,11 @@ struct HTTPNetworkRequest {
         do {
 
             if let headers = headers, let parameters = parameters {
-                try URLParameterEncoder.encode(urlRequest: &request, with: parameters)
-                
-                request.allHTTPHeaderFields = headers
+                try URLEncoder.encodeParameters(for: &request, with: parameters)
+                try URLEncoder.setHeaders(for: &request, with: headers)
             }
         } catch {
             throw HTTPNetworkError.encodingFailed
         }
     }
-
-    // Appends additional http headers besides application/headers
-//    fileprivate func addAdditionalHeaders(for headers: HTTPHeaders?, request: inout URLRequest){
-//
-//        guard let unwrappedHeaders = headers else { return }
-//        for (key,value) in unwrappedHeaders{
-//            request.setValue(value, forHTTPHeaderField: key)
-//        }
-//    }
 }

@@ -159,7 +159,7 @@ struct PhotoServices{
                 // Not enough info to construct a PhotoItem
                 return nil
         }
-        return Photo(title: title, dateTaken: dateTaken as NSDate, photoID: photoID, remoteURL: url)
+        return Photo(title: title, dateTaken: dateTaken as Date, photoID: photoID, remoteURL: url) as Photo
     }
     
     static func photoItems(fromJSON data: Data) -> PhotoFetchResult {

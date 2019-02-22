@@ -10,14 +10,14 @@ import Foundation
 
 //TODO: Recreate this as an object that implements the Codable interface
 
-class Photo {
+class Photo: Codable {
     
     let title: String?
-    let dateTaken: NSDate?
+    let dateTaken: Date?
     let photoID: String?
     let remoteURL: URL?
 
-    init(title: String?, dateTaken: NSDate?, photoID: String?, remoteURL: URL?)   {
+    init(title: String?, dateTaken: Date?, photoID: String?, remoteURL: URL?)   {
         self.title = title
         self.dateTaken = dateTaken!
         self.photoID = photoID
