@@ -115,6 +115,7 @@
 		B845D9B521EAFCE700D2C3A5 /* ProductHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B8B91A62221F8E6900A0B246 /* Protocols */,
 				B8CF77D821FBE8C400FE5445 /* Helpers */,
 				B8CF77D721FBE8BD00FE5445 /* Extensions */,
 				B8CF77D221FBDFFC00FE5445 /* Networking */,
@@ -148,6 +149,14 @@
 				B863FB742218D5D6003A665C /* HTTPNetworkRequest.swift */,
 			);
 			path = HTTP;
+			sourceTree = "<group>";
+		};
+		B8B91A62221F8E6900A0B246 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA49AC220F7AFA00F4A28C /* URLEncoderDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		B8CF77CF21FBDFE300FE5445 /* Models */ = {
@@ -235,7 +244,6 @@
 		B8FA49A7220F772900F4A28C /* Encoding */ = {
 			isa = PBXGroup;
 			children = (
-				B8FA49AC220F7AFA00F4A28C /* URLEncoderDelegate.swift */,
 				B8FA49B0220F814200F4A28C /* URLEncoder.swift */,
 			);
 			path = Encoding;

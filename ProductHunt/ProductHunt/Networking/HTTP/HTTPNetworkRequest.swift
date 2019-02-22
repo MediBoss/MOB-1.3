@@ -19,19 +19,20 @@ struct HTTPNetworkRequest {
         
     ]
     
+    /// Configure the Network request to be made
     static func configureHTTPRequest(from route: Route, with parameters: HTTPParameters, and method: HTTPMethod) throws -> URLRequest {
         
         guard let url = URL(string: "\(Constant.PRODUCT_HUNT_API_BASE_URL)\(route.rawValue)") else { fatalError("Erro while unwrapping url")}
         
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = method.rawValue
-        try configureParameters(parameters: parameters, headers: headers, request: &request)
+        try configureParametersAndHeaders(parameters: parameters, headers: headers, request: &request)
         
         return request
     }
     
-    // Configures the parameters by encoding them
-    static func configureParameters(parameters: HTTPParameters?,
+    /// Configure the request parameters and headers before the API Call
+    static func configureParametersAndHeaders(parameters: HTTPParameters?,
                                          headers: HTTPHeaders?,
                                          request: inout URLRequest) throws {
 
