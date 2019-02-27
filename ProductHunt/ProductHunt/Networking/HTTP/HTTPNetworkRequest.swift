@@ -8,6 +8,9 @@
 
 import Foundation
 
+public typealias HTTPParameters = [String: Any]
+public typealias HTTPHeaders = [String: String]
+
 struct HTTPNetworkRequest {
     
     static let headers = [
@@ -20,7 +23,7 @@ struct HTTPNetworkRequest {
     ]
     
     /// Configure the Network request to be made
-    static func configureHTTPRequest(from route: Route, with parameters: HTTPParameters, and method: HTTPMethod) throws -> URLRequest {
+    static func configureHTTPRequest(from route: HTTPNetworkRoute, with parameters: HTTPParameters, and method: HTTPMethod) throws -> URLRequest {
         
         guard let url = URL(string: "\(Constant.PRODUCT_HUNT_API_BASE_URL)\(route.rawValue)") else { fatalError("Erro while unwrapping url")}
         

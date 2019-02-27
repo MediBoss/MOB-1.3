@@ -11,7 +11,6 @@ import Foundation
 // The enumeration defines possible errrors to encounter during Network Request
 public enum HTTPNetworkError: String, Error {
     
-    case badHTTPRequest = "Error Found : The request mad yielded an error."
     case parametersNil = "Error Found : Parameters URL were nil."
     case encodingFailed = "Error Found : Parameter Encoding failed."
     case decodingFailed = "Error Found : Unable to Decode the data."
@@ -21,4 +20,10 @@ public enum HTTPNetworkError: String, Error {
     case FragmentResponse = "Error Found : The API's response's body has fragments."
     case UnwrappingError = "Error Found : Unable to unwrape the data."
     case dataTaskFailed = "Error Found : The Data Task object failed."
+    case success = "Successful Network Request"
+    case authenticationError = "Error Found : You must be Authenticated"
+    case badRequest = "Error Found : Bad Request"
+    case pageNotFound = "Error Found : Page/Route rquested not found."
+    case failed = "Error Found : Network Request failed"
+    case serverSideError = "Error Found : Server error"
 }

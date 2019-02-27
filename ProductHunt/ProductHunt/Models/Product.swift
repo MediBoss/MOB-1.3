@@ -22,6 +22,7 @@ struct Product{
 struct ProductList: Decodable {
     let posts : [Product]
 }
+
 extension Product: Decodable{
     
     enum ProductKeys: String, CodingKey{
