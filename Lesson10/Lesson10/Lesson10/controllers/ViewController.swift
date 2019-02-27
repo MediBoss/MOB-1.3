@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     @IBAction func alamofirePostBtnClicked(_ sender: Any) {
         
         // TODO: Call HTTP Post function on AlamoFireApiService instance
+        AlamoFireApiService.getAlamoFire()
         
 
     }
