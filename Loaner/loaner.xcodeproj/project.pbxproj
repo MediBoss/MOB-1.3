@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B88894952228BC29004737D9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B88894942228BC29004737D9 /* GoogleService-Info.plist */; };
+		B88894982228BCF9004737D9 /* DBReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88894972228BCF9004737D9 /* DBReference.swift */; };
+		B888949A2228C15F004737D9 /* Loanee.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88894992228C15F004737D9 /* Loanee.swift */; };
 		BE2134D4D37992E803106427 /* Pods_loaner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528A0795562032C6D1E827A0 /* Pods_loaner.framework */; };
 		E929E9692124EB7E0018488C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929E9682124EB7E0018488C /* AppDelegate.swift */; };
 		E929E96B2124EB7E0018488C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929E96A2124EB7E0018488C /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		3EE18EB3CAB98A019C4F0874 /* Pods-loaner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loaner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-loaner/Pods-loaner.debug.xcconfig"; sourceTree = "<group>"; };
 		528A0795562032C6D1E827A0 /* Pods_loaner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_loaner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B88894942228BC29004737D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B88894972228BCF9004737D9 /* DBReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBReference.swift; sourceTree = "<group>"; };
+		B88894992228C15F004737D9 /* Loanee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loanee.swift; sourceTree = "<group>"; };
 		E929E9652124EB7E0018488C /* loaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E929E9682124EB7E0018488C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E929E96A2124EB7E0018488C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +68,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B88894962228BCDC004737D9 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				B88894972228BCF9004737D9 /* DBReference.swift */,
+			);
+			path = Persistance;
+			sourceTree = "<group>";
+		};
 		C53187B912ACBBCB015CDD2F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +106,7 @@
 		E929E9672124EB7E0018488C /* loaner */ = {
 			isa = PBXGroup;
 			children = (
+				B88894962228BCDC004737D9 /* Persistance */,
 				E929E9682124EB7E0018488C /* AppDelegate.swift */,
 				E929E96A2124EB7E0018488C /* ViewController.swift */,
 				E96F11E92128BCCA004D549A /* ItemCollectionViewCell.swift */,
@@ -108,6 +121,7 @@
 				E929E9712124EB810018488C /* LaunchScreen.storyboard */,
 				E929E9742124EB810018488C /* Info.plist */,
 				B88894942228BC29004737D9 /* GoogleService-Info.plist */,
+				B88894992228C15F004737D9 /* Loanee.swift */,
 			);
 			path = loaner;
 			sourceTree = "<group>";
@@ -234,6 +248,8 @@
 				E9D24DF121278BCD0045C5D8 /* ItemNotesViewController.swift in Sources */,
 				E929E96B2124EB7E0018488C /* ViewController.swift in Sources */,
 				E9BA28F321274FED004FA7D3 /* Item.swift in Sources */,
+				B888949A2228C15F004737D9 /* Loanee.swift in Sources */,
+				B88894982228BCF9004737D9 /* DBReference.swift in Sources */,
 				E96F11EA2128BCCA004D549A /* ItemCollectionViewCell.swift in Sources */,
 				E9BA28F521275B1A004FA7D3 /* ItemDetailedViewController.swift in Sources */,
 				E9D24DF3212794E30045C5D8 /* ItemContactInfoViewController.swift in Sources */,

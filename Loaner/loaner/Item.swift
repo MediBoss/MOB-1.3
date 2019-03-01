@@ -56,23 +56,3 @@ struct Item {
         }
     }
 }
-
-struct Loanee {
-    var name: String
-    var profileImage: UIImage = UIImage(named: "no profile image")!
-    var contactNumber: String?
-    var contactInfo: CNContact! = nil
-    
-    init(name: String, profileImage: UIImage, contactNumber: String?) {
-        self.name = name
-        self.profileImage = profileImage
-        self.contactNumber = contactNumber
-    }
-    
-    init(name: String, profileImage: UIImage, contactNumber: String?, contact: CNContact) {
-        self.name = name
-        self.profileImage = profileImage
-        self.contactNumber = contactNumber
-        self.contactInfo = contact
-    }
-}
