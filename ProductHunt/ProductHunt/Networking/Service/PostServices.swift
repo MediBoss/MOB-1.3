@@ -55,7 +55,7 @@ struct PostServices{
             }.resume()
         } catch {
             // Handle error form NetworkRequest Struct
-            completion(nil, HTTPNetworkError.badHTTPRequest.rawValue)
+            completion(nil, HTTPNetworkError.badRequest.rawValue)
         }
         
     }
