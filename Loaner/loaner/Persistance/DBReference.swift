@@ -11,14 +11,19 @@ import Firebase
 
 struct DBReference{
     
+    
     static func saveItemToDatabase(for item: Item){
         
+        let mutatingItem = item
         let ref = Database.database().reference()
         let key = ref.child("Items").childByAutoId().key
-        ref.child("Items").child(key!).setValue(item)
+        ref.child("Items").child(key!).setValue(mutatingItem.toDictionary())
+        
+
     }
     
-    func uploadProfileImage(_ image:UIImage, key: String, completion: @escaping ((_ url:URL?)->())) {
+    static func uploadProfileImage(_ image: UIImage, key: String, completion: @escaping(_ url:URL?)->()) {
+        
         let storageRef = Storage.storage().reference().child("items/\(key)")
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.75) else { return }
@@ -41,6 +46,7 @@ struct DBReference{
     /// Returns all the loaners objects saved on the DB
     static func index() -> [Item]{
         
+        // TODO : ADD GDC TO PERFOMR THIS OPERATION CONCURENLTY
         var items = [Item]()
         var ref: DatabaseReference!
         ref = Database.database().reference().child("items")
@@ -54,10 +60,10 @@ struct DBReference{
                     let loanee = restDict["loanee"] else { return }
                 
                 let person = Loanee(name: "", contactNumber: "")
-                let item = Item(itemTitle: name, notes: notes, itemImage:url, loanee: person)
-                self.items.append(item)
+                let item = Item(itemTitle: name, notes: notes, itemImageURL: url, loanee: person)
+                
+                items.append(item)
             }
-            self.collectionView.reloadData()
         })
         
         return items

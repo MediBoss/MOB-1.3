@@ -29,9 +29,9 @@ struct Loanee {
         self.contactInfo = contact
     }
     
-    convenience init(name: String, contactInfo: Int){
+    init(name: String, contactNumber: String){
         self.name = name
-        self.contactInfo = contactInfo
+        self.contactNumber = contactNumber
     }
 }
 

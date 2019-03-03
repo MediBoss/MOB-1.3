@@ -5,12 +5,13 @@
 //  Created by Erick Sanchez on 8/17/18.
 //  Copyright © 2018 LinnierGames. All rights reserved.
 //
-
 import UIKit
 import ContactsUI
+import Firebase
+import FirebaseStorage
 
 class ItemContactInfoViewController: UIViewController {
-
+    
     var item: Item!
     
     func updateUI() {
@@ -81,6 +82,20 @@ class ItemContactInfoViewController: UIViewController {
             return
         }
         
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        let key = ref.child("Items").childByAutoId().key
+        
+        DBReference.saveItemToDatabase(for: item)
+        
+        DBReference.uploadProfileImage(imageViewItem.image!, key: key!) { (url) in
+            
+            ref.child("Items").child(key!).updateChildValues(["imageUrl": url?.absoluteString as Any])
+        }
+        
+        
+        
         performSegue(withIdentifier: "unwind from saving new item", sender: nil)
     }
     
@@ -89,7 +104,9 @@ class ItemContactInfoViewController: UIViewController {
         
         updateUI()
     }
+    
 }
+
 
 extension ItemContactInfoViewController: CNContactPickerDelegate {
     func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {

@@ -10,21 +10,34 @@ import Foundation
 import UIKit.UIImage
 import Contacts.CNContact
 
-struct Item {
+struct Item : Codable{
+    
     var itemTitle: String
-    var notes: String = ""
-    var itemImage: UIImage = UIImage(named: "no item image")!
-    var loanee: Loanee? = nil
+    var notes: String
+    var itemImageURL: String?
+    var itemImage: UIImage
+    var loanee: Loanee?
     
     init(itemTitle: String) {
         self.itemTitle = itemTitle
     }
     
-    init(itemTitle: String, notes: String, itemImage: UIImage, loanee: Loanee?) {
+    init(itemTitle: String, notes: String, itemImageURL: String, loanee: Loanee?) {
+        
         self.itemTitle = itemTitle
         self.notes = notes
-        self.itemImage = itemImage
+        self.itemImageURL = itemImageURL
         self.loanee = loanee
+
+    }
+    
+    // Encodes and structures the item object as a dictionary
+    func toDictionary() -> [String: Any]{
+        
+        let data = try! JSONEncoder().encode(self)
+        let json = try! JSONSerialization.jsonObject(with: data, options: [])
+        
+        return json as! [String: Any]
     }
     
     mutating func assignLoanee(to contact: CNContact?) {
