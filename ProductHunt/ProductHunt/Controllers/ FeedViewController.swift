@@ -24,10 +24,7 @@ class FeedViewController: UIViewController{
         self.view.backgroundColor = .blue
         view.addSubview(collectionView)
         anchorFeedCollectionView()
-        PostServices.shared.getPosts { (result, error) in
-            print("hod up")
-        }
-        //updateFeed()
+        updateFeed()
     }
     
     
@@ -46,16 +43,18 @@ class FeedViewController: UIViewController{
                                enableInsets: false)
     }
     
-//    func updateFeed() {
-//        NetworkManager.shared.getPosts() { result in
-//            switch result {
-//            case let .success(products):
-//                self.products = products
-//            case let .failure(error):
-//                print(error)
-//            }
-//        }
-//    }
+    func updateFeed() {
+        
+        PostServices.shared.getPosts { (result) in
+            
+            switch result{
+            case let .success(posts):
+                self.products = posts
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
     
     lazy var collectionView: UICollectionView = {
         
